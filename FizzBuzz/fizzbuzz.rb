@@ -62,19 +62,26 @@ class FizzBuzz
   def get_data_as_json(max)
     array_data = get_data_as_array(max)
     
-    # Not sure what our goal for JSON output will be.  Here is one possibility:
+    use_to_json = false
     
-    # [ { "number":1, "word":"1" }, { "number":2, "word":"2" }, { "number":3, "word":"Fizz" } ]
-    mapsArray = Array.new
-    x = 0
-        
-    array_data.each do |word|
-      x += 1
-      map = { :number => x, :word => word }
-      mapsArray.push(map) 
-    end
+    if (use_to_json)
+      array_data.to_json
+    else
       
-    JSON(mapsArray)
+      # Not sure what our goal for JSON output will be.  Here is one possibility:
+      
+      # [ { "number":1, "word":"1" }, { "number":2, "word":"2" }, { "number":3, "word":"Fizz" } ]
+      mapsArray = Array.new
+      x = 0
+          
+      array_data.each do |word|
+        x += 1
+        map = { :number => x, :word => word }
+        mapsArray.push(map) 
+      end
+        
+      JSON(mapsArray)
+    end
   end
   
   
