@@ -2,6 +2,11 @@ require 'json'
 
 class FizzBuzz
   
+  
+  def initialize(max)
+    @max = max
+  end
+  
   def multiple_of_3?(number)
     number % 3 == 0
   end
@@ -17,36 +22,57 @@ class FizzBuzz
   end
   
   
-  def get_data_as_array(max)
+  def get_data_as_array()
     
-    output = Array.new
-  
-    (1..max).each do |x|
+    # map will automatically gather a structure of return values within the loop into an array
+    
+    (1..@max).map do |x|
       
       if multiple_of_3_and_5?(x)
-        output.push 'FizzBuzz'
+        'FizzBuzz'
       elsif multiple_of_3?(x)
-        output.push 'Fizz'
+        'Fizz'
       elsif multiple_of_5?(x)
-        output.push 'Buzz'
+        'Buzz'
       else
-        output.push x
+        x
       end
       
     end
     
-    output
-    
   end
   
   
-  def get_data_as_text(max)
-    get_data_as_array(max).join(", ")
+#  def get_data_as_array(max)
+#    
+#    output = Array.new
+#  
+#    (1..max).each do |x|
+#      
+#      if multiple_of_3_and_5?(x)
+#        output.push 'FizzBuzz'
+#      elsif multiple_of_3?(x)
+#        output.push 'Fizz'
+#      elsif multiple_of_5?(x)
+#        output.push 'Buzz'
+#      else
+#        output.push x
+#      end
+#      
+#    end
+#    
+#    output
+#    
+#  end
+  
+  
+  def get_data_as_text()
+    get_data_as_array().join(", ")
   end
   
   
-  def get_data_as_html(max)
-    array_data = get_data_as_array(max)
+  def get_data_as_html()
+    array_data = get_data_as_array()
     
     output = '<ul>'
     
@@ -59,8 +85,8 @@ class FizzBuzz
   end
   
   
-  def get_data_as_json(max)
-    array_data = get_data_as_array(max)
+  def get_data_as_json()
+    array_data = get_data_as_array()
     
     use_to_json = false
     
