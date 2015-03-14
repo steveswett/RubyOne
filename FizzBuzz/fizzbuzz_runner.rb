@@ -1,4 +1,4 @@
-require 'FizzBuzz/fizzbuzz'
+require_relative 'fizzbuzz'
 
 fizzbuzz = FizzBuzz.new(15)
 puts( fizzbuzz.get_data_as_text() )
