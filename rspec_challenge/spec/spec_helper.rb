@@ -1,10 +1,3 @@
-require_relative '../library'
-require_relative '../book'
-
-require 'yaml'
-
-
-
 RSpec.configure do |config|
 
   # Begin: to configure "should" syntax:
