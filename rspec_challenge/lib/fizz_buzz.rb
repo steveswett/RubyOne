@@ -1,3 +1,6 @@
+require 'json'
+
+
 class Fixnum
   def divisible_by(num)
     self % num == 0
@@ -61,4 +64,9 @@ class FizzBuzz
   def as_text
     @data.join(", ")
   end
+
+  def as_json
+    @data.to_json
+  end
+
 end
