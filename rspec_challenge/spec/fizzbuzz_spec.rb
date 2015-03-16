@@ -2,12 +2,39 @@ require 'spec_helper'
 require_relative '../lib/fizz_buzz'
 
 
-describe 'FizzBuzz' do
+describe FizzBuzz do
+
+
+  def testOutputExpectations(fizzbuzz_max, expected_text)
+    fizzbuzz = FizzBuzz.new(fizzbuzz_max)
+    expect(fizzbuzz.as_text()).to eq expected_text
+  end
+
 
   describe 'Text output' do
+
+    max_array = [9, 10, 11, 15]
+
+    expected_array = [
+        '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz',
+        '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz',
+        '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11',
+        '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz'
+    ]
+
+    expected_array.each_with_index do |x, idx|
+      it "Gives expected CSV for #{max_array[idx]}" do
+        testOutputExpectations(max_array[idx], x)
+        # fizzbuzz = FizzBuzz.new(9)
+        # expect(fizzbuzz.as_text()).to eq '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz'
+      end
+    end
+
+=begin
     it "Gives expected CSV for 9" do
-      fizzbuzz = FizzBuzz.new(9)
-      expect(fizzbuzz.as_text()).to eq '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz'
+      testOutputExpectations(9, '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz')
+      # fizzbuzz = FizzBuzz.new(9)
+      # expect(fizzbuzz.as_text()).to eq '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz'
     end
 
     it "Gives expected CSV for 10" do
@@ -24,6 +51,7 @@ describe 'FizzBuzz' do
       fizzbuzz = FizzBuzz.new(15)
       expect(fizzbuzz.as_text()).to eq '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz'
     end
+=end
 
   end
 
