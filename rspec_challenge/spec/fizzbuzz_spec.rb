@@ -5,74 +5,51 @@ require_relative '../lib/fizz_buzz'
 describe FizzBuzz do
 
 
-  def testOutputExpectations(fizzbuzz_max, expected_text)
+  def test_output_as_text(fizzbuzz_max, expected_output)
     fizzbuzz = FizzBuzz.new(fizzbuzz_max)
-    expect(fizzbuzz.as_text()).to eq expected_text
+    expect(fizzbuzz.as_text()).to eq expected_output
   end
 
 
-  describe 'Text output' do
+  def test_output_as_json(fizzbuzz_max, expected_output)
+    fizzbuzz = FizzBuzz.new(fizzbuzz_max)
+    expect(fizzbuzz.as_json()).to eq expected_output
+  end
 
-    max_array = [9, 10, 11, 15]
 
-    expected_array = [
-        '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz',
-        '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz',
-        '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11',
-        '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz'
-    ]
+  describe 'Gets output as text' do
 
-    expected_array.each_with_index do |x, idx|
-      it "Gives expected CSV for #{max_array[idx]}" do
-        testOutputExpectations(max_array[idx], x)
-        # fizzbuzz = FizzBuzz.new(9)
-        # expect(fizzbuzz.as_text()).to eq '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz'
+    expectations = {
+        9 => '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz',
+        10 => '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz',
+        11 => '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11',
+        15 => '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz'
+    }
+
+    expectations.each do |key, value|
+      it "Gets text as CSV for #{key}" do
+        test_output_as_text(key, value)
       end
     end
 
-=begin
-    it "Gives expected CSV for 9" do
-      testOutputExpectations(9, '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz')
-      # fizzbuzz = FizzBuzz.new(9)
-      # expect(fizzbuzz.as_text()).to eq '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz'
-    end
-
-    it "Gives expected CSV for 10" do
-      fizzbuzz = FizzBuzz.new(10)
-      expect(fizzbuzz.as_text()).to eq '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz'
-    end
-
-    it "Gives expected CSV for 11" do
-      fizzbuzz = FizzBuzz.new(11)
-      expect(fizzbuzz.as_text()).to eq '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11'
-    end
-
-    it "Gives expected CSV for 15" do
-      fizzbuzz = FizzBuzz.new(15)
-      expect(fizzbuzz.as_text()).to eq '1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz'
-    end
-=end
-
   end
 
 
-  describe 'JSON output' do
-    it "Gives expected JSON for 3" do
-      fizzbuzz = FizzBuzz.new(3)
-      expect(fizzbuzz.as_json).to eq "[1,2,\"Fizz\"]"
+  describe 'Gets output as JSON' do
 
-      # The following works, if we need to get this detailed.
-=begin
-      json_str = JSON.generate(fizzbuzz.data)
-      expect(fizzbuzz.as_json()).to eq json_str
-      json_arr = JSON.parse(json_str)
-      expect(json_arr.length).to eq 3
-      expect(json_arr[0]).to eq 1
-      expect(json_arr[1]).to eq 2
-      expect(json_arr[2]).to eq 'Fizz'
-=end
+    expectations = {
+        3 => '[1,2,"Fizz"]',
+        5 => '[1,2,"Fizz",4,"Buzz"]',
+        11 => '[1,2,"Fizz",4,"Buzz","Fizz",7,8,"Fizz","Buzz",11]',
+        15 => '[1,2,"Fizz",4,"Buzz","Fizz",7,8,"Fizz","Buzz",11,"Fizz",13,14,"FizzBuzz"]'
+    }
 
+    expectations.each do |key, value|
+      it "Gets text as JSON for #{key}" do
+        test_output_as_json(key, value)
+      end
     end
+
   end
 
 end
